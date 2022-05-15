@@ -1,57 +1,17 @@
 #[derive(Debug, PartialEq)]
 pub enum StatusCode {
-    Continue,
-    SwitchingProtocols,
     Ok,
-    Created,
     Accepted,
-    NonAuthoritativeInformation,
-    NoContent,
-    ResetContent,
-    PartialContent,
-    MultipleChoices,
-    MovedPermanently,
-    Found,
-    SeeOther,
-    NotModified,
-    UseProxy,
-    TemporaryRedirect,
-    BadRequest,
-    Unauthorized,
-    PaymentRequired,
-    Forbidden,
     NotFound,
-    MethodNotAllowed,
-    NotAcceptable,
     Uninitialized,
 }
 
 impl From<&str> for StatusCode {
     fn from(s: &str) -> StatusCode {
         match s {
-            "100" => StatusCode::Continue,
-            "101" => StatusCode::SwitchingProtocols,
             "200" => StatusCode::Ok,
-            "201" => StatusCode::Created,
             "202" => StatusCode::Accepted,
-            "203" => StatusCode::NonAuthoritativeInformation,
-            "204" => StatusCode::NoContent,
-            "205" => StatusCode::ResetContent,
-            "206" => StatusCode::PartialContent,
-            "300" => StatusCode::MultipleChoices,
-            "301" => StatusCode::Found,
-            "302" => StatusCode::SeeOther,
-            "303" => StatusCode::SeeOther,
-            "304" => StatusCode::NotModified,
-            "305" => StatusCode::UseProxy,
-            "307" => StatusCode::TemporaryRedirect,
-            "400" => StatusCode::BadRequest,
-            "401" => StatusCode::Unauthorized,
-            "402" => StatusCode::PaymentRequired,
-            "403" => StatusCode::Forbidden,
             "404" => StatusCode::NotFound,
-            "405" => StatusCode::MethodNotAllowed,
-            "406" => StatusCode::NotAcceptable,
             _ => StatusCode::Uninitialized, 
         }
     }
@@ -161,13 +121,13 @@ mod tests {
     }
     #[test]
     fn test_res_line() {
-        let s: String = String::from("HTTP/1.1 404 Not Found\r\nContent-type: text/html");
+        let s: String = String::from("HTTP/1.1 200 Ok\r\nContent-type: text/html");
         let mut headers_expected = HashMap::new();
         headers_expected.insert("Content-type".into(), " text/html".into());
         let res: HttpResponse = s.into();
-        let body = "<h1>404 Not Found</h1>";
+        let body = "<h1>200 Ok</h1>";
         assert_eq!(Version::V1_1, res.version);
-        assert_eq!(StatusCode::NotFound, res.status_code);
+        assert_eq!(StatusCode::Ok, res.status_code);
         assert_eq!(headers_expected, res.header_line);
         assert_eq!(body, res.msg_body);
     }

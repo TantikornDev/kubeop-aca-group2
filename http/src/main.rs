@@ -64,9 +64,9 @@ impl Plant for Bicotyledon {
 // function main
 fn main() {
     println!("\n");
-    let iron: IronFurniture = Furniture::new();
-    println!("skin = {} \n price = {}", iron.getSkin().to_string(), iron.getPrice());
-    println!("\n===\n");
-    let wood: WoodFurniture = Furniture::new();
-    println!("skin = {} \n price = {}", wood.getSkin().to_string(), wood.getPrice());
+    // let iron: IronFurniture = Furniture::new();
+    // println!("skin = {} \n price = {}", iron.getSkin().to_string(), iron.getPrice());
+    // println!("\n===\n");
+    // let wood: WoodFurniture = Furniture::new();
+    // println!("skin = {} \n price = {}", wood.getSkin().to_string(), wood.getPrice());
 }
